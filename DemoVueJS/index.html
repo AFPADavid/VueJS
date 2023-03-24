@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <title>Demo Vue JS</title>
+</head>
+<body>
+    
+    <h1>Démo Vue JS</h1>
+
+    <h2>1ère étape : installation de VueJS</h2>
+    <p>Se rendre sur le site <a target="_blank" href="https://fr.vuejs.org">Vue JS</a> ou même directement dans la <a target="_blank" href="https://fr.vuejs.org/guide/quick-start.html">page d'installation</a></p>
+    <p>Dans notre cas, nous allons passer par le CDN</p>
+    <p>Incluez la balise suivante dans votre code<code>&lt;script src=&quot;https://unpkg.com/vue@3/dist/vue.global.js&quot;&gt;&lt;/script&gt; </code> dans le bas de votre page</p>
+    <p>Pour continuez dans ce que nous avions vu précédement et colle à l'exemple du cours nous allons également inclure bootstrap</p>
+    <p>Dans le head <code>&lt;script src=&quot;https://cdn.jsdelivr.net/npm/vue/dist/vue.js&quot;&gt;&lt;/script&gt;</code>
+        </code></p>
+    <p>Dans le bas de page <code>&lt;script src=&quot;https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js&quot; integrity=&quot;sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN&quot; crossorigin=&quot;anonymous&quot;&gt;&lt;/script&gt;</code></p>
+
+
+    <h2>Implémentation de vuejs</h2>
+    <p>Vue JS fonctione avec les balises HTML qui permettent d'indiquer que l'on utilise vue JS</p>
+    <p>Nous allons créer une div avec l'ID cours <code>&lt;div id=&quot;cours&quot;&gt;&lt;/div&gt;</code> même si habituellement c'est le nom "app" qui est utilsié</p>
+
+    <p> Pour "Déclencher" VueJS sur notre div il faut l'instensier avec un script <code>&lt;script&gt; let app = new Vue({ el: &quot;#cours&quot; }) &lt;/script&gt;</code></p>
+    <p> Le el (pour element) qui corresponds à la balise visé par VueJS</p>
+    <p>Dès ce moment vous pouvez ouvrir votre console et vous verrez que Vue JS est lancé, nous pouvons donc l'utiliser</p>
+    <div id="cours">
+        <div class="container">
+            <div class="row bg-light p-5 rounded m-5">
+                <h2>Récupération d'infos</h2>
+                <p>A partir de là je me trouve dans la partie géré par VueJS</p>
+                <p>Avec le paramètre data il permet de générer et afficher des données dans le HTML</p>
+                <p><code>&lt;script&gt; let app = new Vue({ el: &quot;#cours&quot;, data: { formation: &quot;DWWM&quot;, promo : &quot;2023&quot; } }) &lt;/script&gt;</code></p>
+                <p>Vous êtes en formation {{formation}}, promo {{promo}}</p>
+                
+                <p>Et pour afficher cela dans le HTML vous entourez vos data de deux accolades</p>
+                <p>Depuis votre console vous pouvez changer des valeurs comme app.promo = 2025</p>
+            </div>
+
+            <div class="row bg-light p-5 m-5 rounded">
+                <h2>Transfert d'infos</h2>
+                <p>Maintenant que nous avons des infos qui passent du script à la page web, on va faire l'inverse en changeant ce <b>{{nom}}</b></p>
+                <p>Nous créons un input avec son label</p>
+                <label for="name">Changement de nom</label>
+                <input type="text" id="name" name="name" v-model="nom">
+                <p>Puis nous ajoutons l'attribut v-model qui sert à synchroniser l'input et les données de l'app</p>
+                <p>Donc ici nous écrirons <code> v-model="nom"</code> dans notre input</p>
+                <p>Et dès à présent vous pouvez modifier en direct le nom via ce formulaire</p>
+            </div>
+
+            <div class="row bg-light p-5 m-5 rounded">
+                <h2>Présentation d'une liste</h2>
+                <p>Intégrer une liste se présente de la manière suivante : <code>mesItems : [&quot;item 1&quot;,&quot;item 2&quot;,&quot;item 3&quot;]</code></p>
+                <p>Pour cela nous allons créer une boucle de VueJS avec <code>v-for</code></p>
+                <p>Voici comment (pour afficher une liste) : <code>&lt;li v-for=&quot;item in mesItems&quot;&gt;{{item}}&lt;/li&gt;</code></p>
+                <ul>
+                    <li v-for="item in mesItems">
+                        {{item}}
+                    </li>
+                </ul>
+            </div>
+
+            <div class="row bg-light p-5 m-5 rounded">
+                <h2>Création d'une liste</h2>
+                <p>Nous allons maintenant voir comment créer une liste (un tableau) dans notre VUEJS</p>
+                <p>Il faut tout d'abord que la liste vide soit présente dans le code <code>&lt;li v-for=&quot;item in mesItems&quot;&gt;{{item}}&lt;/li&gt;</code></p>
+                <p>A ce stade voici à quoi ressemble notre code complet : 
+                    <code>let app = new Vue({<br>
+                    el: &quot;#cours&quot;,<bR/>
+                    data: {<br>
+                    formation: &quot;DWWM&quot;,<br>
+                    promo : &quot;2023&quot;,<br>
+                    nom : &quot;nom a changer&quot;,<br>
+                    mesItems : [&quot;item 1&quot;,&quot;item 2&quot;,&quot;item 3&quot;,&quot;item 4&quot;,&quot;item 5&quot;,&quot;item 6&quot;,&quot;item 7&quot;,&quot;item 8&quot;,&quot;item 9&quot;],<br>
+                    itemsEnregistrer :[]<br> }<br>
+                    })
+                    </code>
+                </p>
+                <p>Nous allons maintenant créer une méthode pour effectuer cet enregistrement.<br>Au même niveau que data, créer une entére <code>methods:{}</code></code></p>
+                <p>Ici se situeront toutes les fonctions vueJS que vous voulez créer</p>
+                <p>Par exemple notre fonction d'enregistrement<br><code>methods:{<br>
+                    enregistrer: function(item){<br>
+                    }<br>
+                }</code></p>
+                <p>On ajoute un bouton avec la liste des items avec l'attribut <code>v-on:click</code> pour réagir au clic</p>
+                <p>Le code suivant <code>&lt;li v-for=&quot;item in mesItems&quot;&gt; { {item}} &lt;button v-on:click=&quot;enregistrer(item)&quot;&gt;Enregistrer&lt;/button&gt; &lt;/li&gt;</code> nous donne donc : </p>
+                <ul>
+                    <li v-for="item in mesItems">
+                        {{item}}
+                        <button class="btn btn-primary m-1" v-on:click="enregistrer(item)">Enregistrer</button>
+                    </li>
+                </ul>
+                <p>Et grâce à ce la nous envoyons le nom du produits en paramètre à la fonction enregistrer</p>
+                <p>Pour insérer dans le tableau nous faisons un push dans le tableau <code>this.itemsEnregistrer.push(item)</code></p>
+            </div>
+            
+            
+            <div class="row bg-light p-5 m-5 rounded">
+                <h2>Affichage de la liste</h2>
+                <p>Pour afficher la liste générer nous allons procéder comme tout à l'heure avec v- for</p>
+                <p><code>&lt;li v-for=&quot;itemEnregistrer in itemsEnregistrer&quot;&gt;<br>{ {itemEnregistrer}}<br> &lt;/li&gt;</code></p>
+                <div class="bg-info-subtle" v-if="itemsEnregistrer.length > 0">
+                    <h3>Ici la liste de d'affichage</h3>
+                    <ul>
+                        <li v-for="itemEnregistrer in itemsEnregistrer">
+                            {{itemEnregistrer}}
+                        </li>
+                    </ul>
+                </div>
+                <p>Pour n'afficher notre div bleu clair que si il y a des items dans la liste nous allons utiliser le if de vue JS <code>v-if="itemsEnregistrer.length > 0"</code></p>
+            </div>
+            
+            
+            
+            <div class="row bg-light p-5 m-5 rounded">
+                <h2>Lier (binder) des class avec VueJS</h2>
+                <p>Vous pouvez modifier en direct des class aveeec vueJS grâce à l'attribut <code>v-bind</code></p>
+                <p>Nous allons par exemple faire varier les class de la div ci dessous</p>
+                <div v-bind:class="changeClass" style="color:blue"> Cette div là </div>
+                <p>Pour cela nous écrivons le code suivnat <code>v-bind:class="changeClass"</code><br>
+                    Et dans le code VueJs nous ajoutons le paramètre changeClass(nom choisi arbitrairement) <code>changeClass:"bg-dark"</code>
+                <br>
+                Cela applique directement la class qui est en paramètre (ici bg-dark)</p>
+                <p>vous pouvez modifier depuis la console avec les exemple suivant : bg-primary, bg-secondary, bg-success, bg-danger, bg-warning, bg-info, bg-light</p>
+            </div>
+
+
+            <div class="row bg-light p-5 m-5 rounded">
+                <h2>Utilisation des composants</h2>
+                <p>Les composants permettent de reproduire des éléments en créant des balises personnalisé</p>
+                <p>Par exemple toute une miniature comme celle-ci</p>
+
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+
+
+                    <div class="col">
+                        <div class="card shadow-sm">
+                        <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+            
+                        <div class="card-body">
+                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                            </div>
+                            <small class="text-muted">9 mins</small>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+
+
+                  </div>
+                    <p> Nous allons donc créer notre propre balise du nom de <code>my-thumbnail</code> (ATTENTION PAS DE MAJUSCULE DANS LE NOM)</p>
+                    <p>Puis il faut le créer dans le code et créer le composant <b>AVANT</b> l'instance de vue, car il doit exister pour pouvoir être utiliser</p>
+                    <p>Pour cela rentrer le code <code>Vue.component('my-thumbnail')</code> pour la création d'un composant my-thumbnail</p>
+                    <p>Et en deuxième paramètre un objet JS qui contient plusieurs propriété :
+                        <ul>
+                            <li>template : Chaine de caractère qui contient l'affichage HTML</li>
+                        </ul>
+                    </p>
+                    <p>Et si on ajoute une boucle v-for on peux les multiplier</p>
+                    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                        <my-thumbnail v-for="item in mesItems"></my-thumbnail>
+
+                    </div>
+
+
+
+            </div>
+
+
+            <div class="row bg-light p-5 m-5 rounded">
+                <h2>Méler compostant + boucle + paramètre</h2>
+                <p>Dans la div ci-dessous nous allon créer un composant, qui sera afficher en boucle et qui changera de nom en fonction de l'item</p>
+                <p>Tout d'abord je créer un autre composant my-demo</p>
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">    
+                    <my-demo></my-demo>
+                </div>
+                <p>Puis je l'intègre dans la boucle de mes items avec v-for</p>
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">    
+                    <my-demo v-for="item in mesItems"></my-demo>
+                </div>
+                <p>Maintenant il faut créer une nouvelle propriété à notre component, qui s'appel props, et qui reçois les parmaètres dans un tableau</p>
+                <p>Dans notre cas jsute le nom de l'item <code>props:['nom']</code> cette propriété est transmise via <code>v-bind</code><br>
+                Et ce de la façon suivante : <code> v-bind:nom="item"</code></p>
+
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">    
+                    <my-demo v-for="item in mesItems" v-bind:nom="item"></my-demo>
+                </div>
+
+                <p>Pour le moment cela ne fait rien car le nom n'est pas utilisé dans le template, il faut donc ajouter { {nom}} dans le template</p>
+            </div>
+
+
+
+        </div>
+    </div>
+
+
+    
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    
+    
+    <script>
+
+        Vue.component('my-thumbnail',{
+            template:'segseg'
+            //template:"<p>TEST</p>"
+        })
+
+        Vue.component('my-demo',{
+            template:'<div class="col"><div class="card shadow-sm">                        <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>                                    <div class="card-body">                            <p class="card-text">{{nom}}</p>                            <div class="d-flex justify-content-between align-items-center">                            <div class="btn-group">                                <button type="button" class="btn btn-sm btn-outline-secondary">View</button>                                <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>                            </div>                            <small class="text-muted">9 mins</small>                            </div>                        </div>                        </div>                    </div>',
+            props:['nom']
+        })
+
+
+        let app = new Vue({
+            el: "#cours",
+            data: {
+                formation: "DWWM",
+                promo : "2023",
+                nom : "nom à changer",
+                mesItems : ["item 1","item 2","item 3","item 4","item 5","item 6","item 7","item 8","item 9"],
+                itemsEnregistrer :[],
+                changeClass:"bg-dark"
+            },
+            methods:{
+                enregistrer: function(item){
+                    console.log(item);
+                    this.itemsEnregistrer.push(item)
+                }
+            }
+        });
+    </script>
+    
+    </body>
+</html>

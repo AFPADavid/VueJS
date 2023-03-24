@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Démo Live VueJS</title>
+    <style>
+        .myClass {width: 45%;background-color: green;}
+        .myOtherClass {width: 45%;background-color: red;}
+
+    </style>
+</head>
+<body>
+
+
+<div id="cours">
+    <h1>{{nomAAfficher}} </h1>
+    <p>Vous êtes en formation {{formation}}, promo  {{promo}}, et vous vous appelé : {{nomAAfficher}}    </p>
+
+    <input type="text" id="name" name="name" v-model="nomAAfficher">
+
+    <div style="display: flex;">
+        <div style="width: 45%;">
+            <ul>
+                <li v-for="item in mesItems" >
+                    {{item}}
+                    <button v-on:click="enregistrer(item)">Enregistrer</button>
+                </li>
+            </ul>
+        </div>
+        <div v-bind:class="changerClass" v-if="itemsEnregistrer.length > 0" >
+            <h2 >Votre Commande</h2>
+            <ul>
+                <li v-for="itemEnregistrer in itemsEnregistrer" >
+                    {{itemEnregistrer}}
+                    <button v-on:click="enregistrer(itemEnregistrer)">Enregistrer</button>
+                </li>
+            </ul>
+        </div>
+    </div>
+    
+        <ma-balise-perso v-for="itemEnregistrer in itemsEnregistrer" v-bind:nom="itemEnregistrer"></ma-balise-perso>
+ 
+
+    
+</div>
+
+
+
+<!-- CDN VueJS -->
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+<script>
+
+    Vue.component(
+        'ma-balise-perso',{
+        template:'<div><p>Votre produit {{nom}} est ajouté au panier <a href="#">Voir le panier</a></p></div>',
+        props:['nom']
+    })
+
+    let app = new Vue({
+        el: "#cours",
+        data :{
+            formation :"DWWM",
+            promo : "2023",
+            nomAAfficher  : "votre nom",
+            mesItems : ["lait", "Chocolat chaud", "thé", "café"],
+            itemsEnregistrer : [],
+            changerClass : "myClass"
+        },
+        methods:{
+            enregistrer : function(item){
+                console.log(item);
+                this.itemsEnregistrer.push(item);
+            }
+        }
+    })
+
+
+</script>
+
+</body>
+</html>
